@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "strict": true
+  },
+  "include": ["index.ts", "gateway.ts", "subgraphs/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
