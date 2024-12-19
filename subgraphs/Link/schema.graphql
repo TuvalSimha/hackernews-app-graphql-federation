@@ -1,7 +1,7 @@
 extend schema
   @link(
     url: "https://specs.apollo.dev/federation/v2.0"
-    import: ["@key", "@shareable"]
+    import: ["@key", "@federation__shareable"]
   )
 
 type Query {
@@ -13,11 +13,9 @@ type Link @key(fields: "id") {
   createdAt: String!
   description: String!
   url: String!
-  comments: [Comment]!
+  comments: [Comment]
 }
 
-type Comment @key(fields: "id") {
+type Comment @key(fields: "id", resolvable: false) {
   id: ID!
-  createdAt: String!
-  body: String!
 }

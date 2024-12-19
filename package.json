@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "prettier": "npx prettier . --write",
-    "gateway": "docker run --name hive-gateway --rm -p 4000:4000 ghcr.io/graphql-hive/gateway supergraph 'https://cdn.graphql-hive.com/artifacts/v1/f133ba73-44d2-435a-8d44-aed29bb0ae3c' --hive-cdn-key 'NODE_ENV=HIVE_CDN_KEY'"
+    "gateway": "docker run --name hive-gateway --rm -p 4000:4000 ghcr.io/graphql-hive/gateway supergraph 'https://cdn.graphql-hive.com/artifacts/v1/f133ba73-44d2-435a-8d44-aed29bb0ae3c' --hive-cdn-key NODE_ENV=hv2ZGQ5OGFkMGItMzcwNC00MDExLWJiZWUtNTIyMWE5MDkxN2I3OmNhNzhjN2U5YWRiZGY2YzY5NjczYWY4ZjUzYmNiMGUwMWQ5MjcwZDA="
   },
   "license": "ISC",
   "dependencies": {
