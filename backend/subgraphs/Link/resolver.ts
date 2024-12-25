@@ -1,9 +1,15 @@
 import { GraphQLError } from "graphql";
 import { GraphQLContext } from "../../prisma";
-import { Link, Comment } from "@prisma/client";
-import { PostSortField, SortDirection, TimeRange, PostSort } from "../types";
+import { Link } from "@prisma/client";
+// import { PostSortField, TimeRange, PostSort } from '../types';
+import {
+  LinkResolvers,
+  PostSort,
+  PostSortField,
+  TimeRange,
+} from "../../__generated__/types-resolver";
 
-export const resolvers = {
+export const resolvers: LinkResolvers = {
   Query: {
     feed: async (
       _parent: any,
@@ -13,14 +19,14 @@ export const resolvers = {
       const orderBy: any = {};
       if (args.sort) {
         switch (args.sort.field) {
-          case PostSortField.CREATED_AT:
-            orderBy.createdAt = args.sort.direction.toLowerCase();
+          case PostSortField.CreatedAt:
+            orderBy.createdAt = args.sort.direction?.toLocaleLowerCase();
             break;
-          case PostSortField.TITLE:
-            orderBy.title = args.sort.direction.toLowerCase();
+          case PostSortField.Title:
+            orderBy.title = args.sort.direction?.toLocaleLowerCase();
             break;
-          case PostSortField.COMMENT_COUNT:
-            orderBy.comments = { _count: args.sort.direction.toLowerCase() };
+          case PostSortField.CommentCount:
+            orderBy.comments = { _count: args.sort.direction?.toLowerCase() };
             break;
         }
       }
@@ -37,28 +43,19 @@ export const resolvers = {
 
     trendingPosts: async (
       _parent: any,
-      args: { timeRange: TimeRange; sort?: PostSort },
+      args: { timeRange: TimeRange },
       context: GraphQLContext,
     ) => {
-      const date = new Date();
-      switch (args.timeRange) {
-        case TimeRange.DAY:
-          date.setDate(date.getDate() - 1);
-          break;
-        case TimeRange.WEEK:
-          date.setDate(date.getDate() - 7);
-          break;
-        case TimeRange.MONTH:
-          date.setMonth(date.getMonth() - 1);
-          break;
-      }
+      const now = new Date();
+      const timeRange = args.timeRange === TimeRange.Day ? 1 : 7;
+      const date = new Date(now);
+      date.setDate(now.getDate() - timeRange);
 
       return context.prisma.link.findMany({
         where: {
-          createdAt: { gte: date },
-        },
-        orderBy: {
-          comments: { _count: "desc" },
+          createdAt: {
+            gte: date,
+          },
         },
         include: {
           _count: {

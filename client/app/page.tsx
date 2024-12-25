@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
@@ -110,7 +111,7 @@ export default function Home() {
               </DialogContent>
             </Dialog>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 top-0 sticky">
             <Select
               value={sortField}
               onValueChange={(value) => setSortField(value as PostSortField)}
@@ -141,23 +142,25 @@ export default function Home() {
           </div>
         </CardHeader>
         <CardContent>
-          {data?.feed?.map((post) => (
-            <Link
-              key={post.id}
-              href={`/posts/${post.id}`}
-              className="block p-3 hover:bg-muted rounded-lg"
-            >
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-medium">{post.title}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {post.description}
-                  </p>
+          <ScrollArea className="w-[350px] rounded-md border p-4">
+            {data?.feed?.map((post) => (
+              <Link
+                key={post.id}
+                href={`/posts/${post.id}`}
+                className="block p-3 hover:bg-muted rounded-lg"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="font-medium">{post.title}</h3>
+                    <p className="text-sm truncate text-ellipsis overflow-hidden">
+                      {post.description}
+                    </p>
+                  </div>
+                  <span>{post.commentCount} Comments</span>
                 </div>
-                <span>{post.commentCount} Comments</span>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </ScrollArea>
         </CardContent>
       </Card>
     </div>

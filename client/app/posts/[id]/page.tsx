@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { graphql } from "../../__generated__/gql";
 import { LoadingSpinner } from "@/components/ui/loader";
+import Link from "next/link";
 
 const PostQuery = graphql(/* GraphQL */ `
   query Post($id: ID!) {
@@ -53,7 +54,8 @@ export default function CommentPage() {
       linkId: params.id as string,
       text: comment,
     });
-    reexecuteQuery();
+
+    reexecuteQuery({ requestPolicy: "network-only" });
 
     if (result.error) {
       console.error("Failed to add comment:", result.error);
@@ -70,8 +72,11 @@ export default function CommentPage() {
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle>Hacker News Feed</CardTitle>
-          <h2 className="text-xl font-semibold mt-4">{post?.title}</h2>
+          <h2 className="text-xl font-semibold ">{post?.title}</h2>
           <p className="text-muted-foreground">{post?.description}</p>
+          <Link className="underline" href="/">
+            Back to Feed
+          </Link>
         </CardHeader>
         <CardContent className="space-y-6">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,14 +97,18 @@ export default function CommentPage() {
           <div className="space-y-4">
             <h3 className="font-semibold">Comments</h3>
             <div className="space-y-4">
-              {result.data?.postComments?.map((comment) => (
-                <div key={comment.id} className="p-4 bg-muted rounded-lg">
-                  <p>{comment.body}</p>
-                  <time className="text-sm text-muted-foreground">
-                    {new Date(comment.createdAt).toLocaleDateString()}
-                  </time>
-                </div>
-              ))}
+              {result.data?.postComments.length === 0 ? (
+                <p className="text-muted-foreground">No comments yet</p>
+              ) : (
+                result.data?.postComments.map((comment) => (
+                  <div key={comment.id} className="space-y-2">
+                    <p>{comment.body}</p>
+                    <p className="text-muted-foreground">
+                      {new Date(comment.createdAt).toLocaleString()}
+                    </p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </CardContent>

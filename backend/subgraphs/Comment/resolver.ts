@@ -1,9 +1,12 @@
-import { Link, Comment } from "@prisma/client";
 import { GraphQLContext } from "../../prisma";
-import { CommentSort } from "../types";
 import { GraphQLError } from "graphql";
+import { Comment, Link } from "@prisma/client";
+import {
+  CommentResolvers,
+  CommentSort,
+} from "../../__generated__/types-resolver";
 
-export const resolvers = {
+export const resolvers: CommentResolvers = {
   Query: {
     comment: (
       _parent: any,
