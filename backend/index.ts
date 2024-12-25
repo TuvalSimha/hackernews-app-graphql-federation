@@ -1,4 +1,4 @@
-import { startSubgraphs } from "./gateway";
+import { startSubgraphs } from "./subgraph";
 
 // 1. Start all subgraphs in monolith mode
 async function main() {

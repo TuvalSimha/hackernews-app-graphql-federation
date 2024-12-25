@@ -1,0 +1,33 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
+
+type Query {
+  comment(id: ID!): Comment
+  postComments(linkId: ID!, sort: CommentSort): [Comment!]!
+}
+
+type Mutation {
+  addNewComment(text: String!, linkId: ID!): Comment!
+  deleteComment(commentId: ID!): Comment!
+  updateComment(commentId: ID!, text: String!): Comment!
+}
+
+type Comment @key(fields: "id") {
+  id: ID!
+  createdAt: String!
+  body: String!
+  link: Link!
+}
+
+input CommentSort {
+  direction: SortDirection! = DESC
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+type Link @key(fields: "id", resolvable: false) {
+  id: ID!
+}

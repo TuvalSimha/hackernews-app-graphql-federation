@@ -1,0 +1,51 @@
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.3"
+    import: ["@key", "@shareable"]
+  )
+
+type Query {
+  feed(sort: PostSort): [Link!]!
+  trendingPosts(timeRange: TimeRange, sort: PostSort): [Link!]!
+}
+
+type Mutation {
+  addNewPost(title: String!, description: String!): Link!
+  deletePost(linkId: ID!): Link!
+  updatePost(linkId: ID!, title: String!, description: String!): Link!
+}
+
+type Link @key(fields: "id") {
+  id: ID!
+  createdAt: String!
+  description: String!
+  title: String!
+  commentCount: Int!
+  comments: [Comment]
+}
+
+input PostSort {
+  field: PostSortField! = CREATED_AT
+  direction: SortDirection! = DESC
+}
+
+enum PostSortField {
+  CREATED_AT
+  TITLE
+  COMMENT_COUNT
+}
+
+enum TimeRange {
+  DAY
+  WEEK
+  MONTH
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+type Comment @key(fields: "id", resolvable: false) {
+  id: ID!
+}

@@ -1,0 +1,41 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "workdir",
+      "description": "Run empty",
+      "open": true,
+      "cwd": "./",
+      "command": ""
+    },
+    {
+      "name": "subgraphs:dev",
+      "description": "Run Subgraphs",
+      "focus": true,
+      "open": true,
+      "cwd": "backend/",
+      "command": "pnpm dev"
+    },
+    {
+      "name": "supergraph",
+      "description": "Run the Supergraph Gateway",
+      "open": true,
+      "cwd": "backend/",
+      "command": "pnpm gateway"
+    },
+    {
+      "name": "app-nextjs",
+      "description": "Run Next.js app",
+      "open": true,
+      "cwd": "client/",
+      "command": "pnpm dev"
+    },
+    {
+      "name": "codegen",
+      "description": "Run GraphQL codegen",
+      "open": true,
+      "cwd": "./",
+      "command": "pnpm generate"
+    }
+  ]
+}

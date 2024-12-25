@@ -1,0 +1,32 @@
+{
+  "commands.commands": [
+    {
+      "command": "terminals.runTerminals",
+      "color": "#eab308",
+      "text": "$(rocket) Start App $(rocket)",
+      "tooltip": "Start dev environment"
+    }
+  ],
+  "files.associations": {
+    "*.env.template": "dotenv"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never"
+  },
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/deploy.yaml"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "git.mergeEditor": false,
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+}

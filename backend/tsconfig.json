@@ -11,6 +11,6 @@
     "types": ["node"],
     "strict": true
   },
-  "include": ["index.ts", "gateway.ts", "subgraphs/**/*"],
+  "include": ["index.ts", "subgraph.ts", "subgraphs/**/*"],
   "exclude": ["node_modules", "dist"]
 }
