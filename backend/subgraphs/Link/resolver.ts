@@ -1,7 +1,6 @@
 import { GraphQLError } from "graphql";
 import { GraphQLContext } from "../../prisma";
 import { Link } from "@prisma/client";
-// import { PostSortField, TimeRange, PostSort } from '../types';
 import {
   LinkResolvers,
   PostSort,
