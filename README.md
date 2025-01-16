@@ -1,1 +1,0 @@
-# hackernews-app-graphql-federation

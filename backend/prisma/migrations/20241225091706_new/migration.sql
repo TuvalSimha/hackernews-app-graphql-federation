@@ -1,0 +1,16 @@
+-- CreateTable
+CREATE TABLE "Link" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "description" TEXT NOT NULL,
+    "url" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Comment" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "body" TEXT NOT NULL,
+    "linkId" TEXT NOT NULL,
+    CONSTRAINT "Comment_linkId_fkey" FOREIGN KEY ("linkId") REFERENCES "Link" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
